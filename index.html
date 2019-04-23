@@ -2,11 +2,77 @@
   <head>
     <title>Vue.js Basics</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+    <script>document.write('<script src="http://' + (location.host || '${1:localhost}').split(':')[0] + ':${2:35729}/livereload.js?snipver=1"></' + 'script>')</script>
+
+
+    <style>    
+    .canvas {
+      width: 300px;
+      height: 300px;
+      margin-top: 30px;
+      background: #ddd;
+    }
+    .one-class{ color:green; }
+    .two-class{ text-decoration: underline; }
+    </style>
+
+
   </head>
   <body>
 
     <h1>Vue Basics</h1>
-    <div id="app"> </div>
+    <div id="app"> 
+
+      <h2>{{ title }}</h2>
+
+      <ul>
+        <li v-for="item in items">{{ item }}</li>
+      </ul>
+
+      <div v-for="(ninja, index) in ninjas" style="background: #f2f2f2">
+        <p>{{ index }} - {{ ninja.name }}</p>
+        <p>{{ ninja.age }}</p>
+        <p>{{ ninja.belt }}</p>
+      </div>
+
+      <hr>
+      <p v-if="showName">Mario</p>
+      <p v-else-if="showAge">25</p>
+
+      <button @click="toggleName">Toggle the name ({{showName}})</button>      
+      <button @click="toggleAge">Toggle the name ({{showAge}})</button>
+
+      <hr>
+      <button class="sup" @click="logEvent">Log Event Info</button>
+
+      <div class="canvas" @mousemove="logCoords"> {{ coords.x }}, {{ coords.y }} </div>
+
+      <p>I earn {{ wage }} euro per hour.</p>
+
+      <button @click="changeWage(100)">Increase wage by 100 euro</button>
+      <button v-on:click="changeWage(-50)">Decrease wage by 50 euro</button>
+
+      <button v-on:dblclick="changeWage(620 * 4)">Increase wage by 620 euro</button>
+      <button v-on:dblclick="changeWage(-314)">Decrease wage by 314 euro</button>
+
+      
+      <p>{{ greet('evening','STOP') }}</p>
+
+      <a :href="url">Here is a link to YouTube</a>
+
+      <div :class="classes" >Classes from instance</div>
+
+      <input type="text" @keyup="updateName" :value="name">
+      <input type="text" @keypress="updateName" :value="name">
+
+      <input type="text" v-model="name">
+
+      <button @click.shift="logMessage">Shift click this button to logMessage</button>
+
+      <a href="https://www.google.com" @click.prevent="logMessage" target="_blank">Google.com link</a>
+      
+    </div>
 
     <script src="app.js"></script>
   </body>
